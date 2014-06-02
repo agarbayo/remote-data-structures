@@ -6,7 +6,7 @@ class QueueTest extends \PHPUnit_Framework_TestCase
 {
     public function testQueue()
     {
-        $queue = new \RemoteDataStructures\RedisQeue();
+        $queue = new \RemoteDataStructures\RedisQueue();
         $queue->enqueue(1);
         $queue->enqueue(2);
 

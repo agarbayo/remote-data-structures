@@ -7,7 +7,7 @@ use Predis\Client;
 /**
  *
  */
-class RedisQeue {
+class RedisQueue {
    
     /** @var string */
     private $key;
