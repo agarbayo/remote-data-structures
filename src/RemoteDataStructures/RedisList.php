@@ -2,22 +2,14 @@
 
 namespace RemoteDataStructures;
 
-use Predis\Client;
-
 /**
  * 
  * @author Angel Garbayo
  */
-abstract class RedisList implements \Countable, \ArrayAccess {
+abstract class RedisList extends RedisData implements \Countable, \ArrayAccess {
     
-    /** @var string */
-    protected $key;
-    
-    /** @var Client */
-    protected $redis;
-    
-    public function __construct(array $conf = null) {
-        $this->redis = new Client($conf);
+    public function __construct($key = null, array $conf = null) {
+        parent::__construct($key, $conf);
     }
     
     public function count() {

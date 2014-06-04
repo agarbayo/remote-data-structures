@@ -14,7 +14,6 @@ class RedisFixedArray extends RedisList {
     
     public function __construct($size = 0, array $conf = null) {
         parent::__construct($conf);
-        $this->key  = 'fixedarray';
         $this->setSize($size);
     }
     

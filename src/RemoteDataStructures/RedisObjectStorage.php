@@ -8,9 +8,8 @@ namespace RemoteDataStructures;
  */
 class RedisObjectStorage extends RedisMap {
     
-    public function __construct($conf = null) {
-       parent::__construct($conf);
-       $this->key = 'objectstorage';
+    public function __construct($key = null, $conf = null) {
+       parent::__construct($key, $conf);
     }
     
     public function addAll(RedisObjectStorage $storage) {

@@ -2,26 +2,17 @@
 
 namespace RemoteDataStructures;
 
-use Predis\Client;
-
 /**
  *
  */
-class RedisQueue {
+class RedisQueue extends RedisData {
    
-    /** @var string */
-    private $key;
-    
-    /** @var Client */
-    private $redis;
-    
     /**
      * 
      * @param array $conf Configuration for Redis client
      */
-    public function __construct(array $conf = null) {
-        $this->key  = 'queue';
-        $this->redis = new Client($conf);
+    public function __construct($key = null, array $conf = null) {
+        parent::__construct($key, $conf);
     }
     
     /**

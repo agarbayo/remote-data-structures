@@ -2,20 +2,12 @@
 
 namespace RemoteDataStructures;
 
-use Predis\Client;
-
 /**
  * Remote heap backed by a Redis SortedSet.
  * 
  * Unlike SplHeap doesnt fully implement \Iterator
  */
-abstract class RedisHeap implements \Countable {
-    
-    /** @var string */
-    protected $key;
-    
-    /** @var Client */
-    protected $redis;
+abstract class RedisHeap extends RedisData implements \Countable {
     
     /** @var string Decides order in which elements by score are retrieved */
     protected $rangeCmd = 'ZRANGE';
@@ -24,9 +16,8 @@ abstract class RedisHeap implements \Countable {
      * 
      * @param array $conf Configuration for Redis client
      */
-    public function __construct(array $conf = null) {
-        $this->redis = new Client($conf);
-        $this->key  = 'heap';
+    public function __construct($key = null, array $conf = null) {
+        parent::__construct($key, $conf);
     }
     
     public function count() {

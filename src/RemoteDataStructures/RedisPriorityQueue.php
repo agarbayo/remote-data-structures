@@ -16,9 +16,8 @@ class RedisPriorityQueue extends RedisMaxHeap {
      * 
      * @param array $conf Configuration for Redis client
      */
-    public function __construct(array $conf = null) {
-        parent::__construct($conf);
-        $this->key  = 'prioritiedqueue';
+    public function __construct($key = null, array $conf = null) {
+        parent::__construct($key, $conf);
     }
     
      public function extract() {

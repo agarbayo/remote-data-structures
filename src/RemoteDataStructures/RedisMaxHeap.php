@@ -13,10 +13,9 @@ class RedisMaxHeap extends RedisHeap {
      * 
      * @param array $conf Configuration for Redis client
      */
-    public function __construct(array $conf = null) {
-        parent::__construct($conf);
+    public function __construct($key = null, array $conf = null) {
+        parent::__construct($key, $conf);
         $this->rangeCmd = 'ZREVRANGE';
-        $this->key  = 'maxheap';
     }
     
     /**

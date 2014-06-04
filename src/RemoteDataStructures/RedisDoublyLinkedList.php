@@ -19,7 +19,6 @@ class RedisDoublyLinkedList extends RedisList implements \Iterator {
      */
     public function __construct(array $conf = null) {
         parent::__construct($conf);
-        $this->key  = 'DoublyLinkedList';
         $this->iteratorMode = \SplDoublyLinkedList::IT_MODE_FIFO;
         $this->iteratorIdx = null;
     }

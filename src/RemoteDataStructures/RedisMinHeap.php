@@ -13,9 +13,8 @@ class RedisMinHeap extends RedisHeap {
      * 
      * @param array $conf Configuration for Redis client
      */
-    public function __construct(array $conf = null) {
-        parent::__construct($conf);
-        $this->key  = 'minheap';
+    public function __construct($key = null, array $conf = null) {
+        parent::__construct($key, $conf);
     }
     
     /**

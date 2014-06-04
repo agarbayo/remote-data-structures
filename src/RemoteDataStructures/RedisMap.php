@@ -2,24 +2,15 @@
 
 namespace RemoteDataStructures;
 
-use Predis\Client;
-
 /**
  * HashMap backed by Redis Hash.
  * 
  * @author Angel Garbayo
  */
-abstract class RedisMap implements \Countable, \ArrayAccess {
+abstract class RedisMap extends RedisData implements \Countable, \ArrayAccess {
     
-    /** @var string */
-    protected $key;
-    
-    /** @var Client */
-    protected $redis;
-    
-    public function __construct(array $conf = null) {
-        $this->redis = new Client($conf);
-        $this->key = 'map';
+    public function __construct($key = null, array $conf = null) {
+        parent::__construct($key, $conf);
     }
     
     public function count() {
