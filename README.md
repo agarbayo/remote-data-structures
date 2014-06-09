@@ -52,3 +52,8 @@ public function getUser($id) {
 
 
 
+## Notes
+
+Other collection libraries in PHP:
+- http://stackoverflow.com/questions/1580223/java-like-collections-in-php
+- https://github.com/schmittjoh/php-collection
