@@ -23,8 +23,10 @@ abstract class RedisData {
      * @param array $conf
      */
     public function __construct($key = null, array $conf = null) {
-        $this->redis = new Client($conf);
         $this->key   =  (empty($key))?$this->genKey():$key;
+        
+        $conf        = $conf==null?RedisConfiguration::getParameters($this->key):$conf;
+        $this->redis = new Client($conf);
     }
     
     

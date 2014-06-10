@@ -50,7 +50,33 @@ public function getUser($id) {
 }
 ```
 
+## Connection to Redis
 
+Connections work as in https://github.com/nrk/predis#connecting-to-redis, each class can receive
+an array of parameters to configure the connection.
+
+Configuration parameters can be specified globally with RedisConfiguration. Each class will
+try to find its parameters first with RedisConfiguration when none were provided.
+
+
+```php
+
+// Define default configuration
+RedisConfiguration::setParameters([
+            'scheme' => 'tcp',
+            'host'   => '10.0.0.1',
+            'port'   => 6379,
+        ]);
+
+// Only that key will use this params
+RedisConfiguration::setParameters([
+    'scheme' => 'tcp',
+    'host'   => '10.0.0.2',
+    'port'   => 6379,
+],
+'\RemoteDataStructures\RedisMinHeapTest');
+
+```
 
 ## Notes
 
