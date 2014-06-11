@@ -3,18 +3,23 @@
 namespace RemoteDataStructures;
 
 use Predis\Client;
+use RemoteDataStructures\Iterators\NoIterator;
 
 /**
+ * Common structures and fields to all data structures backed by Redis
  *
  * @author Angel Garbayo
  */
-abstract class RedisData {
+abstract class RedisData implements \IteratorAggregate {
     
     /** @var string */
     protected $key;
     
     /** @var Client */
     protected $redis;
+    
+    /** @var IteratorAggregate */
+    protected $iterator;
     
     /**
      * 
@@ -23,12 +28,35 @@ abstract class RedisData {
      * @param array $conf
      */
     public function __construct($key = null, array $conf = null) {
-        $this->key   =  (empty($key))?$this->genKey():$key;
+        $this->key      =  (empty($key))?$this->genKey():$key;
+        $this->iterator = new NoIterator();
         
         $conf        = $conf==null?RedisConfiguration::getParameters($this->key):$conf;
         $this->redis = new Client($conf);
     }
     
+    public function getIterator() {
+        return $this->iterator;
+    }
+    
+    /**
+     * Assigns a remote iterator.
+     * 
+     * By design all remote data structures lack a valid iterator, the iteration policy
+     * used over the remote data structure must be chosen explicitly for each instance
+     * with this function.
+     * 
+     * @param string $iteratorName Name of the iterator. eg. 'CopyIterator'
+     * @throws \InvalidArgumentException
+     */
+    public function setIteratorType($iteratorName) {
+        $iteratorClass = '\RemoteDataStructures\Iterators\\'.$iteratorName;
+        if (!is_subclass_of($iteratorClass, '\RemoteDataStructures\Iterators\RemoteIterator')) {
+            throw new \InvalidArgumentException("Iterator $iteratorClass is not a valid remote iterator");
+        }
+        
+        $this->iterator = new $iteratorClass($this);
+    }
     
     /**
      * Key is name is composer of the package and class name of where this
@@ -42,7 +70,8 @@ abstract class RedisData {
     }
     
     /**
-     * @return string
+     * @return string Class name where the function calling this name is located.
+     *                Empty string is no suitable class was found
      */
     private function findCallerClassName() {
         $traceClasses = array_column(debug_backtrace(), 'class');

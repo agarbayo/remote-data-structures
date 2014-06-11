@@ -6,12 +6,10 @@ namespace RemoteDataStructures;
  * Partial implementation of SplDoublyLinkedList.
  * 
  */
-class RedisDoublyLinkedList extends RedisList implements \Iterator {
+class RedisDoublyLinkedList extends RedisList {
     
     /** @var int */
     private $iteratorMode;
-    
-    private $iteratorIdx;
     
     /**
      * 
@@ -20,7 +18,6 @@ class RedisDoublyLinkedList extends RedisList implements \Iterator {
     public function __construct(array $conf = null) {
         parent::__construct($conf);
         $this->iteratorMode = \SplDoublyLinkedList::IT_MODE_FIFO;
-        $this->iteratorIdx = null;
     }
     
     /**
@@ -40,10 +37,6 @@ class RedisDoublyLinkedList extends RedisList implements \Iterator {
         return $this->offsetGet(0);
     }
     
-    public function current() {
-        return $this->offsetGet($this->iteratorIdx);
-    }
-    
     public function getIteratorMode() { 
         return $this->iteratorMode;
     }
@@ -53,14 +46,6 @@ class RedisDoublyLinkedList extends RedisList implements \Iterator {
         return $this->count() == 0;
     }
     
-    public function key() {
-        return $this->iteratorIdx;
-    }
-    public function next() { 
-        if ($this->valid()) {
-            $this->iteratorIdx++;
-        }
-    }
     
     public function pop() {
         return $this->top();
@@ -76,10 +61,6 @@ class RedisDoublyLinkedList extends RedisList implements \Iterator {
         $cmd = $this->redis->createCommand('RPUSH');
         $cmd->setArguments(array($this->key, $value));
         $this->redis->executeCommand($cmd);
-    }
-    
-    public function rewind() {
-        $this->iteratorIdx = 0;
     }
     
     public function serialize() {
@@ -119,10 +100,6 @@ class RedisDoublyLinkedList extends RedisList implements \Iterator {
         $cmd = $this->redis->createCommand('LPUSH');
         $cmd->setArguments(array($this->key, $value));
         return $this->redis->executeCommand($cmd);  
-    }
-    
-    public function valid() { 
-        return ($this->count()-1>$this->iteratorIdx);
     }
     
 }

@@ -71,6 +71,7 @@ class DoublyLinkedListTest extends \PHPUnit_Framework_TestCase
         $dummyArray = [1, 2, 3];
         
         $list = new \RemoteDataStructures\RedisDoublyLinkedList();
+        $list->setIteratorType('CursorIterator');
         $list->delete();
         foreach ($dummyArray as $v) {
             $list[] = $v;
