@@ -49,12 +49,8 @@ abstract class RedisData implements \IteratorAggregate {
      * @throws \InvalidArgumentException
      */
     public function setIteratorType($iteratorName, $args = array()) {
-        $iteratorClass = '\RemoteDataStructures\Iterators\\'.$iteratorName;
-        if (!is_subclass_of($iteratorClass, '\RemoteDataStructures\Iterators\RemoteIterator')) {
-            throw new \InvalidArgumentException("Iterator $iteratorClass is not a valid remote iterator");
-        }
-        
-        $class = new \ReflectionClass($iteratorClass);
+        $className = Iterators\RemoteIterator::getFullClassFromName($iteratorName);
+        $class = new \ReflectionClass($className);
         $instance = $class->newInstanceArgs(array_merge([$this], $args));
         
         $this->iterator = $instance;
