@@ -18,7 +18,7 @@ abstract class RedisData implements \IteratorAggregate {
     /** @var Client */
     protected $redis;
     
-    /** @var IteratorAggregate */
+    /** @var Traversable */
     protected $iterator;
     
     /**
@@ -28,9 +28,8 @@ abstract class RedisData implements \IteratorAggregate {
      * @param array $conf
      */
     public function __construct($key = null, array $conf = null) {
-        $this->key      =  (empty($key))?$this->genKey():$key;
-        $this->iterator = new NoIterator();
-        
+        $this->key   =  (empty($key))?$this->genKey():$key;
+        $this->iterator = new \RemoteDataStructures\Iterators\NoIterator($this);
         $conf        = $conf==null?RedisConfiguration::getParameters($this->key):$conf;
         $this->redis = new Client($conf);
     }

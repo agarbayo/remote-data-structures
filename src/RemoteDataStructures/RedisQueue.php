@@ -5,8 +5,9 @@ namespace RemoteDataStructures;
 /**
  *
  */
-class RedisQueue extends RedisData {
-   
+class RedisQueue extends RedisData implements \Countable {
+    use RedisCountableList;
+    
     /**
      * 
      * @param array $conf Configuration for Redis client

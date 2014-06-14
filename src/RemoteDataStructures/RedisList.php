@@ -2,22 +2,18 @@
 
 namespace RemoteDataStructures;
 
+use RemoteDataStructures\Slice;
+
 /**
  * 
  * @author Angel Garbayo
  */
-abstract class RedisList extends RedisData implements \Countable, \ArrayAccess {
+abstract class RedisList extends RedisData implements \Countable, \ArrayAccess, Slice {
+    use RedisCountableList;
     
     public function __construct($key = null, array $conf = null) {
         parent::__construct($key, $conf);
     }
-    
-    public function count() {
-        $cmd = $this->redis->createCommand('LLEN');
-        $cmd->setArguments(array($this->key));
-        return $this->redis->executeCommand($cmd);
-    }
-    
     
      public function offsetExists($index) { 
         return $this->offsetGet($index)!=null;
@@ -44,5 +40,11 @@ abstract class RedisList extends RedisData implements \Countable, \ArrayAccess {
             $pipe->lset($this->key, $index, 'TOREMOVE');
             $pipe->lrem($this->key, 1, 'TOREMOVE');
         });
+    }
+    
+    public function slice($start, $end) {
+            $cmd = $this->redis->createCommand('LRANGE');
+            $cmd->setArguments(array($this->key, $start, $end));
+            return $this->redis->executeCommand($cmd);
     }
 }

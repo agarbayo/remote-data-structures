@@ -3,23 +3,27 @@
 namespace RemoteDataStructures\Iterators;
 
 /**
- *
- * @author angel
+ * Iterates fetching one element at a time.
+ * Only compatible for structures implementing \Countable and \ArrayAccess
+ * 
+ * @author Angel Garbayo
  */
 class CursorIterator extends RemoteIterator {
     
     /** @var int */
     private $iteratorIdx = null;
     
-    private $dataStructure;
-    
     public function __construct($dataStructure) {
-        $this->dataStructure = $dataStructure;
+        if (!$dataStructure instanceof \ArrayAccess || !$dataStructure instanceof \Countable) {
+            throw new \InvalidArgumentException("Must implement Countable and ArrayAccess to use CursorIterator");
+        }
+        parent::__construct($dataStructure);
     }
     
     public function key() {
         return $this->iteratorIdx;
     }
+    
     public function next() { 
         if ($this->valid()) {
             $this->iteratorIdx++;
@@ -31,7 +35,8 @@ class CursorIterator extends RemoteIterator {
     }
     
     public function valid() { 
-        return ($this->dataStructure->count()-1>$this->iteratorIdx);
+        $cnt = $this->dataStructure->count();
+        return ($this->dataStructure->count()-$this->iteratorIdx);
     }
 
     public function current() {
