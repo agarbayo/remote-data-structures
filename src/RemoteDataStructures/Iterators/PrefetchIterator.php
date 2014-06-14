@@ -25,7 +25,7 @@ class PrefetchIterator extends CursorIterator {
      */
     public function __construct($dataStructure, $prefetch = 10) {
         if (!$dataStructure instanceof \RemoteDataStructures\Slice) {
-            
+            throw new \InvalidArgumentException("Data structure must implement Slice interface");
         }
         parent::__construct($dataStructure);
         $this->prefetch = $prefetch;
