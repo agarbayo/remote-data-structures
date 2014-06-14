@@ -1,6 +1,6 @@
 <?php
 
-namespace RemoteDataStructures;
+namespace RemoteDataStructures\Redis\Spl;
 
 /**
  * Remote max heap backed by a Redis SortedSet.

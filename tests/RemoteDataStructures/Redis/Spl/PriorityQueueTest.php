@@ -1,12 +1,12 @@
 <?php
 
-namespace RemoteDataStructure;
+namespace RemoteDataStructure\Redis\Spl;
 
 class PriorityQueueTest extends \PHPUnit_Framework_TestCase
 {
     public function testDataFlag()
     {
-        $pQueue = new \RemoteDataStructures\RedisPriorityQueue();
+        $pQueue = new \RemoteDataStructures\Redis\Spl\RedisPriorityQueue();
         $pQueue->insert(1);
         $pQueue->insert(2);
         $pQueue->insert(3);
@@ -17,7 +17,7 @@ class PriorityQueueTest extends \PHPUnit_Framework_TestCase
     
     public function testPriorityFlag()
     {
-        $pQueue = new \RemoteDataStructures\RedisPriorityQueue();
+        $pQueue = new \RemoteDataStructures\Redis\Spl\RedisPriorityQueue();
         $pQueue->setExtractFlags(\SplPriorityQueue::EXTR_PRIORITY);
         $pQueue->insert(1);
         $pQueue->insert(2);
@@ -29,7 +29,7 @@ class PriorityQueueTest extends \PHPUnit_Framework_TestCase
     
     public function testBothFlag()
     {
-        $pQueue = new \RemoteDataStructures\RedisPriorityQueue();
+        $pQueue = new \RemoteDataStructures\Redis\Spl\RedisPriorityQueue();
         $pQueue->setExtractFlags(\SplPriorityQueue::EXTR_BOTH);
         $pQueue->insert(1);
         $pQueue->insert(2);

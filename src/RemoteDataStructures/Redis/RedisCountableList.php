@@ -1,6 +1,6 @@
 <?php
 
-namespace RemoteDataStructures;
+namespace RemoteDataStructures\Redis;
 
 /**
  * Encapsulate counting number of elements in a RedisList

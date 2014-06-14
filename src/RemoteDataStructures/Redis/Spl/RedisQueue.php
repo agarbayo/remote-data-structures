@@ -1,12 +1,14 @@
 <?php
 
-namespace RemoteDataStructures;
+namespace RemoteDataStructures\Redis\Spl;
+
+use RemoteDataStructures\Redis\RedisData;
 
 /**
  *
  */
 class RedisQueue extends RedisData implements \Countable {
-    use RedisCountableList;
+    use \RemoteDataStructures\Redis\RedisCountableList;
     
     /**
      * 

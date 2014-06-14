@@ -1,12 +1,12 @@
 <?php
 
-namespace RemoteDataStructure;
+namespace RemoteDataStructure\Redis\Spl;
 
 class HeapTest extends \PHPUnit_Framework_TestCase
 {
     public function testMinHeap()
     {
-        $heap = new \RemoteDataStructures\RedisMinHeap();
+        $heap = new \RemoteDataStructures\Redis\Spl\RedisMinHeap();
         $heap->insert(1);
         $heap->insert(2);
         $heap->insert(3);
@@ -17,7 +17,7 @@ class HeapTest extends \PHPUnit_Framework_TestCase
     
     public function testMaxHeap()
     {
-        $heap = new \RemoteDataStructures\RedisMaxHeap();
+        $heap = new \RemoteDataStructures\Redis\Spl\RedisMaxHeap();
         $heap->insert(1);
         $heap->insert(2);
         $heap->insert(3);

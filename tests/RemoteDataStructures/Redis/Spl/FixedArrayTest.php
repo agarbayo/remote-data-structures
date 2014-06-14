@@ -1,12 +1,12 @@
 <?php
 
-namespace RemoteDataStructure;
+namespace RemoteDataStructure\Redis\Spl;
 
 class FixedArrayTest extends \PHPUnit_Framework_TestCase
 {
     public function testFixedArray()
     {
-        $arr = new \RemoteDataStructures\RedisFixedArray(5);
+        $arr = new \RemoteDataStructures\Redis\Spl\RedisFixedArray(5);
         $arr[1] = 1;
         $arr[2] = 2;
 

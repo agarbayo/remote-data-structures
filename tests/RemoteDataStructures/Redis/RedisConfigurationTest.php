@@ -2,7 +2,7 @@
 
 namespace RemoteDataStructure;
 
-use RemoteDataStructures\RedisConfiguration;
+use RemoteDataStructures\Redis\RedisConfiguration;
 
 /**
  *

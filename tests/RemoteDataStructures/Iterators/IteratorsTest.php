@@ -1,6 +1,6 @@
 <?php
 
-namespace RemoteDataStructure;
+namespace RemoteDataStructure\Iterators;
 
 class IteratorsTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,7 +11,7 @@ class IteratorsTest extends \PHPUnit_Framework_TestCase
      */
     public function testNoIterationIsDefault($dataStructure)
     {
-        $fullClass = '\\RemoteDataStructures\\'.$dataStructure;
+        $fullClass = '\\RemoteDataStructures\\Redis\\Spl\\'.$dataStructure;
         $instance  = new $fullClass();
         foreach ($instance as $item) {
             // By default all data structures are not iterable. Should never get here

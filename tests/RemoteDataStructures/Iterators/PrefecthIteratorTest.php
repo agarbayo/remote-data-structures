@@ -1,11 +1,11 @@
 <?php
 
-namespace RemoteDataStructure;
+namespace RemoteDataStructure\Iterators;
 
 class PrefetchIteratorTest extends \PHPUnit_Framework_TestCase {
     
     public function testTraverseWithPrefetchIterator() {
-        $list = new \RemoteDataStructures\RedisDoublyLinkedList();
+        $list = new \RemoteDataStructures\Redis\Spl\RedisDoublyLinkedList();
         $list->delete();
         $list->setIteratorType('PrefetchIterator');
         $data = [1, 2, 3, 4, 5, 6];

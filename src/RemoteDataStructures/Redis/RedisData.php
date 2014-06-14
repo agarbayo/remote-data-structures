@@ -1,6 +1,6 @@
 <?php
 
-namespace RemoteDataStructures;
+namespace RemoteDataStructures\Redis;
 
 use Predis\Client;
 
@@ -49,7 +49,7 @@ abstract class RedisData implements \IteratorAggregate {
      * @throws \InvalidArgumentException
      */
     public function setIteratorType($iteratorName, $args = array()) {
-        $className = Iterators\RemoteIterator::getFullClassFromName($iteratorName);
+        $className = \RemoteDataStructures\Iterators\RemoteIterator::getFullClassFromName($iteratorName);
         $class = new \ReflectionClass($className);
         $instance = $class->newInstanceArgs(array_merge([$this], $args));
         

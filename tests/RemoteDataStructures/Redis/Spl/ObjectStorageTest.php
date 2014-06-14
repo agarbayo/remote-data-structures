@@ -1,12 +1,12 @@
 <?php
 
-namespace RemoteDataStructure;
+namespace RemoteDataStructure\Redis\Spl;
 
 class ObjectStorageTest extends \PHPUnit_Framework_TestCase
 {
     public function testObjectStorage()
     {
-        $s = new \RemoteDataStructures\RedisObjectStorage();
+        $s = new \RemoteDataStructures\Redis\Spl\RedisObjectStorage();
         $o1 = new \StdClass;
         $o2 = new \StdClass;
         

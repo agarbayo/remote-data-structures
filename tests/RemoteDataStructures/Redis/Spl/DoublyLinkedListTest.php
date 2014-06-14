@@ -1,6 +1,6 @@
 <?php
 
-namespace RemoteDataStructure;
+namespace RemoteDataStructure\Redis\Spl;
 
 class DoublyLinkedListTest extends \PHPUnit_Framework_TestCase
 {
@@ -70,7 +70,7 @@ class DoublyLinkedListTest extends \PHPUnit_Framework_TestCase
     public function dummyArray() {
         $dummyArray = [1, 2, 3];
         
-        $list = new \RemoteDataStructures\RedisDoublyLinkedList();
+        $list = new \RemoteDataStructures\Redis\Spl\RedisDoublyLinkedList();
         $list->setIteratorType('CursorIterator');
         $list->delete();
         foreach ($dummyArray as $v) {

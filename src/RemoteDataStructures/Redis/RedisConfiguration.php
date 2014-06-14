@@ -1,6 +1,6 @@
 <?php
 
-namespace RemoteDataStructures;
+namespace RemoteDataStructures\Redis;
 
 /**
  *

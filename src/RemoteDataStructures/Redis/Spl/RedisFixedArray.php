@@ -1,6 +1,8 @@
 <?php
 
-namespace RemoteDataStructures;
+namespace RemoteDataStructures\Redis\Spl;
+
+use RemoteDataStructures\Redis\RedisList;
 
 /**
  * Remote fixed array backed by Redis list..
