@@ -50,6 +50,26 @@ public function getUser($id) {
 }
 ```
 
+## Iteration
+
+How iteration should happen over a remote collection it is likely to be a highly dependent  
+on each particular use case.
+That is why by default iterating over a collection throws an exception. Should you need
+to iterate, the strategy for iteration must be explicitly chosen.
+
+```php
+// Iterate copying elements in batches of 5
+$list->setIteratorType('PrefetchIterator', [5]);
+
+// Will copy the entire collection before iterating
+$list->setIteratorType('PrefetchIterator', [count($list)]);
+
+
+// These two are equivalent
+$list->setIteratorType('PrefetchIterator', [1]);
+$list->setIteratorType('CursorIterator');
+```
+
 ## Connection to Redis
 
 Connections work as in https://github.com/nrk/predis#connecting-to-redis, each class can receive

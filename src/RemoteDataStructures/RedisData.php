@@ -3,7 +3,6 @@
 namespace RemoteDataStructures;
 
 use Predis\Client;
-use RemoteDataStructures\Iterators\NoIterator;
 
 /**
  * Common structures and fields to all data structures backed by Redis
@@ -46,15 +45,19 @@ abstract class RedisData implements \IteratorAggregate {
      * with this function.
      * 
      * @param string $iteratorName Name of the iterator. eg. 'CopyIterator'
+     * @param array  $args Arguments to pass to the iterator
      * @throws \InvalidArgumentException
      */
-    public function setIteratorType($iteratorName) {
+    public function setIteratorType($iteratorName, $args = array()) {
         $iteratorClass = '\RemoteDataStructures\Iterators\\'.$iteratorName;
         if (!is_subclass_of($iteratorClass, '\RemoteDataStructures\Iterators\RemoteIterator')) {
             throw new \InvalidArgumentException("Iterator $iteratorClass is not a valid remote iterator");
         }
         
-        $this->iterator = new $iteratorClass($this);
+        $class = new \ReflectionClass($iteratorClass);
+        $instance = $class->newInstanceArgs(array_merge([$this], $args));
+        
+        $this->iterator = $instance;
     }
     
     /**
