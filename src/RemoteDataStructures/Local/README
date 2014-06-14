@@ -1,0 +1,3 @@
+
+In-memory implementations of some of the remote data structures. 
+Created just for the sake of easily interchange between a remote and a local implementation.

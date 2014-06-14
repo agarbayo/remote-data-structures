@@ -1,0 +1,8 @@
+
+This folder contains implementations of data structures in Redis.
+
+- / 
+    Common classes and generic data structures
+
+- /Spl
+    Redis implementations of SPL data structures
