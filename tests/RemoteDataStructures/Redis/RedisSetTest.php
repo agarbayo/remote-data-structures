@@ -2,44 +2,39 @@
 
 namespace RemoteDataStructure;
 
-use RemoteDataStructures\Redis\RedisConfiguration;
-
 /**
  *
  * @author Angel Garbayo
  */
 class RedisSetTest extends \PHPUnit_Framework_TestCase {
-    
-    public function testRedisDefaultParameters() {
-        // Should be default to localhost
-        $c = RedisConfiguration::getParameters();
-        $this->assertNull($c);
+
+    /**
+     * @dataProvider sets
+     */
+    public function testSetDontHaveDuplicateElements(\RemoteDataStructures\Set $set) {
+        $set->delete();
+        $set->add(1);
+        $set->add(2);
+        $set->add(2);
         
-        // Should be newly assigned conf
-        RedisConfiguration::setParameters([
-            'scheme' => 'tcp',
-            'host'   => '10.0.0.1',
-            'port'   => 6379,
-        ]);
-        $c = RedisConfiguration::getParameters();
-        $this->assertEquals('10.0.0.1', $c['host']);
+        $this->assertCount(2, $set);
     }
     
-    public function testConfigurationParametersByKey() {
-        $key = '\RemoteDataStructures\RedisMinHeapTest';
-        RedisConfiguration::setParameters([
-            'host'   => '192.168.0.1',
-        ],
-        $key);
-        
-        $c = RedisConfiguration::getParameters($key);
-        $this->assertEquals('192.168.0.1', $c['host']);
-        
-        $defaultC = RedisConfiguration::getParameters();
-        $this->assertNull($defaultC);
+    /**
+     * @dataProvider sets
+     */
+    public function testSetAcceptObjects(\RemoteDataStructures\Set $set) {
+        $set->delete();
+        $obj = new \stdClass();
+        $set->add($obj);
+        $obj2 = $set->pop();
+        $this->assertEquals($obj, $obj2);
     }
     
-    protected function tearDown() {
-        RedisConfiguration::setParameters(null);
+    public function sets() {
+        return [
+            [new \RemoteDataStructures\Local\ArraySet()],
+            [new \RemoteDataStructures\Redis\RedisSet()]
+            ];
     }
 }
