@@ -8,7 +8,7 @@ namespace RemoteDataStructures\Redis;
  * @author Angel Garbayo
  */
 class RedisSet extends RedisData implements \Countable, \RemoteDataStructures\Set {
-    
+    use RedisDataFormat;
     
     public function count() {
         return $this->redis->scard($this->key);
@@ -39,21 +39,6 @@ class RedisSet extends RedisData implements \Countable, \RemoteDataStructures\Se
     
     public function delete() {
         $this->redis->del($this->key);
-    }
-    
-    /**
-     * Makes sure the member can be sent to Redis. 
-     * 
-     * @param mixed $member
-     * @return mixed 
-     */
-    private function toRedisFormat($member) {
-        return is_object($member)?serialize($member):$member;
-    }
-    
-    private function fromRedisFormat($data) {
-        $unserialized = @unserialize($data);
-        return ($unserialized==false)?$data:$unserialized;
     }
     
 }
