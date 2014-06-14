@@ -1,4 +1,8 @@
-SPL data structure backed by Redis.
+Data structures backed by Redis.
+
+ - Counter, Set, Map and List
+ - HyperLogLog set
+ - All SPL data structures
 
 
 The project provides the standard set of PHP data structures implemented in Redis.
